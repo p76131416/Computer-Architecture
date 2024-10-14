@@ -5,7 +5,7 @@ left1:  .word 10
 right1: .word 15
 left2:  .word 20
 right2: .word 100
-prime:  .word 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+prime:  .word 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 33
 str0:   .string "The total number of prime number of set bits is: "
 str1:   .string "\n"
 .text
@@ -27,7 +27,7 @@ store_ra:
 loop_main:
     li s3, 0
     la a1, prime
-    li a2, 11
+    li a2, 12
     bgt s0, s1, print   #left > right , print ans
     mv t0, s0           # input left to my_clz
 while:
@@ -57,7 +57,8 @@ is_prime:
     addi a1, a1, 4
     addi a2, a2, -1
     beq s3, a3, true
-    bge a2, x0, is_prime
+    bgt s3, a3, is_prime
+    #bge a2, x0, is_prime
     addi s0, s0, 1      # left++
     j loop_main         # another data
 true:
